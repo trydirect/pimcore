@@ -1,0 +1,5 @@
+parameters:
+    secret: {{SecretToken}}
+
+    pimcore_executable_cjpeg: /usr/local/bin/cjpeg
+    pimcore_executable_sqip: /usr/local/bin/primitive
