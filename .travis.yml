@@ -20,6 +20,7 @@ install:
   - docker-compose ps
 
 before_script:
+  - cd $TRAVIS_BUILD_DIR
   - pip install requests
   - pip install docker
 
