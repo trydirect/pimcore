@@ -16,17 +16,16 @@ services:
           - "443:443"
           - "80:80"
     volumes:
-        - ./build/configs/nginx/nginx.conf:/etc/nginx/nginx.conf
-        - ./build/configs/nginx/conf.d:/etc/nginx/conf.d
-        - ./build/configs/certs/letsencrypt:/etc/letsencrypt
-        - ./build/configs/certs/ssl:/etc/nginx/ssl
-        - ./build/configs/cron:/var/spool/cron/crontabs
+        - build/configs/nginx/nginx.conf:/etc/nginx/nginx.conf
+        - build/configs/nginx/conf.d:/etc/nginx/conf.d
+        - build/configs/certs/letsencrypt:/etc/letsencrypt
+        - build/configs/certs/ssl:/etc/nginx/ssl
+        - build/configs/cron:/var/spool/cron/crontabs
     links:
         - db
     depends_on:
           db:
               condition: service_healthy
-
     entrypoint: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n
 
   db:
