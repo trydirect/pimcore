@@ -54,6 +54,12 @@ RUN easy_install uno; \
     wget https://github.com/imagemin/mozjpeg-bin/raw/master/vendor/linux/cjpeg -O /usr/local/bin/cjpeg; \
     chmod 0755 /usr/local/bin/cjpeg;
 
+RUN useradd -m -s /bin/nologin pimcore
+
+RUN touch /var/run/nginx.pid && \
+  mkdir -p /var/cache/nginx && \
+  chown -R pimcore:pimcore /var/run/nginx.pid && \
+  chown -R pimcore:pimcore /var/cache/nginx
 
 ADD ./configs/php/fpm/php.ini /etc/php/7.1/fpm/php.ini
 ADD ./configs/php/www.conf /etc/php/7.1/fpm/pool.d/www.conf
@@ -68,4 +74,5 @@ RUN go get -u github.com/fogleman/primitive; apt-get purge -qq -y npm software-p
     apt-get clean; apt-get autoclean; \
     apt-get autoremove -y -qq
 
+USER pimcore
 WORKDIR /var/www/html
