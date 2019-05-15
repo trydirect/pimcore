@@ -1,10 +1,18 @@
 FROM ubuntu:16.04
 RUN apt-get update -y -qq; apt-get install -y -qq software-properties-common; \
     LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y; apt-get update -y -qq; \
-    apt-get install -y -qq nginx sudo supervisor wget composer php7.1-fpm php7.1-common php7.1-mbstring php7.1-xmlrpc php7.1-soap \
-    php7.1-gd php7.1-xml php7.1-intl php7.1-mysql php7.1-cli php7.1-zip php7.1-bz2 php7.1-curl php7.1-imagick php7.1-apcu \
-    php7.1-redis  libreoffice  libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 \
+    apt-get install -y -qq nginx sudo supervisor wget php7.2-fpm php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap \
+    php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-bz2 php7.2-curl php7.2-imagick php7.2-apcu \
+    php7.2-redis  libreoffice  libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 \
     ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git procps
+
+# Install composer
+RUN apt-get install -y -qq curl && \
+        curl -sS https://getcomposer.org/installer | php -- \
+        --filename=composer \
+        --install-dir=/usr/local/bin && \
+        echo "alias composer='composer'" >> /root/.bashrc && \
+        composer
 
 RUN easy_install uno; \
     npm install -g sqip; \
@@ -41,13 +49,13 @@ RUN easy_install uno; \
     wget https://github.com/imagemin/mozjpeg-bin/raw/master/vendor/linux/cjpeg -O /usr/local/bin/cjpeg; \
     chmod 0755 /usr/local/bin/cjpeg;
 
-RUN echo "opcache.enable=1" >> /etc/php/7.1/fpm/php.ini && \
-    echo "opcache.enable=1" >> /etc/php/7.1/cli/php.ini && \
+RUN echo "opcache.enable=1" >> /etc/php/7.2/fpm/php.ini && \
+    echo "opcache.enable=1" >> /etc/php/7.2/cli/php.ini && \
     phpenmod opcache && \
     php -i | grep opcache
 
 # Too long to wait
-RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo-basic /var/www/html/pimcore
+RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo-basic /usr/src/pimcore
 
 RUN useradd -m -s /bin/bash pimcore
 
@@ -57,8 +65,8 @@ RUN touch /var/run/nginx.pid && \
   chown -R pimcore:pimcore /var/cache/nginx && \
   chown -R pimcore:pimcore /var/log
 
-ADD ./configs/php/fpm/php.ini /etc/php/7.1/fpm/php.ini
-ADD ./configs/php/www.conf /etc/php/7.1/fpm/pool.d/www.conf
+ADD ./configs/php/fpm/php.ini /etc/php/7.2/fpm/php.ini
+ADD ./configs/php/www.conf /etc/php/7.2/fpm/pool.d/www.conf
 ADD ./configs/supervisord/pimcore.conf /etc/supervisor/conf.d/pimcore.conf
 ADD ./scripts/letsencrypt-auto /opt/letsencrypt/letsencrypt-auto
 RUN chmod +x /opt/letsencrypt/letsencrypt-auto; /opt/letsencrypt/letsencrypt-auto  --os-packages-only --install-only --non-interactive
