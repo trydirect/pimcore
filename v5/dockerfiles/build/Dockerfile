@@ -4,7 +4,7 @@ RUN apt-get update -y -qq; apt-get install -y -qq software-properties-common; \
     apt-get install -y -qq nginx sudo supervisor wget composer php7.1-fpm php7.1-common php7.1-mbstring php7.1-xmlrpc php7.1-soap \
     php7.1-gd php7.1-xml php7.1-intl php7.1-mysql php7.1-cli php7.1-zip php7.1-bz2 php7.1-curl php7.1-imagick php7.1-apcu \
     php7.1-redis  libreoffice  libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 \
-    ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git
+    ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git procps
 
 RUN easy_install uno; \
     npm install -g sqip; \
