@@ -41,6 +41,11 @@ RUN easy_install uno; \
     wget https://github.com/imagemin/mozjpeg-bin/raw/master/vendor/linux/cjpeg -O /usr/local/bin/cjpeg; \
     chmod 0755 /usr/local/bin/cjpeg;
 
+RUN echo "opcache.enable=1" >> /etc/php/7.1/fpm/php.ini && \
+    echo "opcache.enable=1" >> /etc/php/7.1/cli/php.ini && \
+    phpenmod opcache && \
+    php -i | grep opcache
+
 # Too long to wait
 RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo-basic /var/www/html/pimcore
 
