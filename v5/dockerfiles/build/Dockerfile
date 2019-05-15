@@ -55,7 +55,8 @@ RUN echo "opcache.enable=1" >> /etc/php/7.2/fpm/php.ini && \
     php -i | grep opcache
 
 # Too long to wait
-RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo-basic /usr/src/pimcore
+RUN composer global require hirak/prestissimo
+RUN COMPOSER_MEMORY_LIMIT=-1 SYMFONY_ENV=prod composer create-project pimcore/demo-basic /usr/src/pimcore --no-dev
 
 RUN useradd -m -s /bin/bash pimcore
 
