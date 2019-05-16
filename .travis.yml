@@ -26,6 +26,7 @@ before_script:
 
 script:
   - python tests.py
+  - bash ./.travis/linters.sh
 
 notifications:
   slack:

@@ -1,14 +1,15 @@
 FROM ubuntu:16.04
+
 RUN apt-get update -y -qq; apt-get install -y -qq software-properties-common; \
     LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y; apt-get update -y -qq; \
     apt-get install -y -qq nginx sudo supervisor wget php7.2-fpm php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap \
     php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-bz2 php7.2-curl php7.2-imagick php7.2-apcu \
     php7.2-redis  libreoffice  libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 \
-    ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git procps
+    ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git procps curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*;
 
 # Install composer
-RUN apt-get install -y -qq curl && \
-        curl -sS https://getcomposer.org/installer | php -- \
+RUN curl -sS https://getcomposer.org/installer | php -- \
         --filename=composer \
         --install-dir=/usr/local/bin && \
         echo "alias composer='composer'" >> /root/.bashrc && \
