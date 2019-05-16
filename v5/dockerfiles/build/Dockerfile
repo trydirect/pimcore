@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-RUN apt-get update -y -qq; apt-get install -y -qq software-properties-common; \
+RUN apt-get update -y -qq; apt-get install -y -qq software-properties-common --no-install-recommends; \
     LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y; apt-get update -y -qq; \
     apt-get install -y -qq nginx sudo supervisor wget php7.2-fpm php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap \
     php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-bz2 php7.2-curl php7.2-imagick php7.2-apcu \
@@ -67,10 +67,10 @@ RUN touch /var/run/nginx.pid && \
   chown -R pimcore:pimcore /var/cache/nginx && \
   chown -R pimcore:pimcore /var/log
 
-ADD ./configs/php/fpm/php.ini /etc/php/7.2/fpm/php.ini
-ADD ./configs/php/www.conf /etc/php/7.2/fpm/pool.d/www.conf
-ADD ./configs/supervisord/pimcore.conf /etc/supervisor/conf.d/pimcore.conf
-ADD ./scripts/letsencrypt-auto /opt/letsencrypt/letsencrypt-auto
+COPY ./configs/php/fpm/php.ini /etc/php/7.2/fpm/php.ini
+COPY ./configs/php/www.conf /etc/php/7.2/fpm/pool.d/www.conf
+COPY ./configs/supervisord/pimcore.conf /etc/supervisor/conf.d/pimcore.conf
+COPY ./scripts/letsencrypt-auto /opt/letsencrypt/letsencrypt-auto
 RUN chmod +x /opt/letsencrypt/letsencrypt-auto; /opt/letsencrypt/letsencrypt-auto  --os-packages-only --install-only --non-interactive
 
 ENV GOPATH="/usr/local"
