@@ -16,11 +16,11 @@ for c in client.containers.list():
 # Pimcore PHP
 php = client.containers.get('pimcore')
 assert php.status == 'running'
-php_conf = php.exec_run("php-fpm7.1 -t")
+php_conf = php.exec_run("php-fpm7.2 -t")
 print(php_conf.output.decode())
 # assert 'php-fpm.conf test is successful' in php_conf.output.decode()
 php_proc = php.exec_run("sh -c 'ps aux|grep php-fpm'")
-assert 'php-fpm: master process (/etc/php/7.1/fpm/php-fpm.conf)' in php_proc.output.decode()
+assert 'php-fpm: master process (/etc/php/7.2/fpm/php-fpm.conf)' in php_proc.output.decode()
 assert 'success: php-fpm entered RUNNING state' in php.logs()
 
 mysql = client.containers.get('pimcoredb')
