@@ -59,7 +59,7 @@ RUN echo "opcache.enable=1" >> /etc/php/7.2/fpm/php.ini && \
 RUN composer global require hirak/prestissimo
 RUN COMPOSER_MEMORY_LIMIT=-1 SYMFONY_ENV=prod composer create-project pimcore/demo-basic /usr/src/pimcore --no-dev
 
-RUN useradd -m -s /bin/bash pimcore
+RUN groupadd -r -g 2000 pimcore; useradd -r -u 2000 -g 2000 -m -c "app account" -d /home/pimcore -s /bin/bash pimcore
 
 RUN touch /var/run/nginx.pid && \
   mkdir -p /var/cache/nginx && \
