@@ -28,7 +28,7 @@ after_success:
 - cd v5/dockerfiles
 - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 - docker-compose -f docker-compose-build.yml images
-- docker push trydirect/laravel:5.7
+- docker push trydirect/pimcore:5
 env:
   global:
   - secure: ZkmYuhd/XZhV7FM7WjBVQo+KqeWdoZzZae/A5eCPHMvnNJul9f/pMwbHLgYOv1SBL4EgrSviL35lxJE0uziVMWg5tqzs+tRhZjkinUAOfFWlTx91rtzYCfvcoP0Yrm9Ccib99x36ILrCZlec+0P0kwOpMLk1FQYg8HLnI29gJKfJ+o2P7/o1MgcS7dgb8Cws03VlIM/7fVbkZ9MOL0NbwHMmYbQhEqNcOECXlPnD184iVCKSRwFGYjwxus2m9H1HnXVG5xDARlU1Sp7hVPKNwY1iImDqTugP1qhjBtBRGfI7JiNFVkGxvxZLb5W627LKmXXP1MTLkrFVEJjaTMyp0GaUEVK5qlt7kJlGPodh+MrmcZLREQUebxvLnvBqoPfROT5UdMF/hY1U+syEdoF2yfypNNmn7W1f7yRCCX8eJuVJY/Yq6Pr1IBjeKPOG1hKvV998cdZpjY+VtDAifu90/cWvNZhZCuT0/uNc/224ttTkQIJxyLkIxlN88a+0/q9ZEB3VMMBlO2XgcADgn6ftge9AWzRwOQBtfuz5Pf2HuHHvwaanV8BiiUHbka0hVMKhsql2ucJNB4DjAQivXbPgJVrQu05l56/INHLq5eNCqd1RaWTAkBQ83nK0M+6D87m+/H+3TE8FHxZENVFFGXpxvc7U7bvrz0QlBB6YAbvbbSE=

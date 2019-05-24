@@ -4,7 +4,8 @@ RUN apt-get update -y -qq; apt-get install -y -qq software-properties-common; \
     apt-get install -y -qq nginx sudo supervisor wget composer php7.1-fpm php7.1-common php7.1-mbstring php7.1-xmlrpc php7.1-soap \
     php7.1-gd php7.1-xml php7.1-intl php7.1-mysql php7.1-cli php7.1-zip php7.1-bz2 php7.1-curl php7.1-imagick php7.1-apcu \
     php7.1-redis  libreoffice  libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 \
-    ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git procps
+    ghostscript python-setuptools libimage-exiftool-perl cron golang-go npm unzip git procps \
+    && apt-get clean && apt-get autoclean && apt-get autoremove -y -qq
 
 RUN easy_install uno; \
     npm install -g sqip; \
@@ -54,8 +55,8 @@ RUN easy_install uno; \
     wget https://github.com/imagemin/mozjpeg-bin/raw/master/vendor/linux/cjpeg -O /usr/local/bin/cjpeg; \
     chmod 0755 /usr/local/bin/cjpeg;
 
-RUN echo "opcache.enable=1" >> /etc/php/7.2/fpm/php.ini && \
-    echo "opcache.enable=1" >> /etc/php/7.2/cli/php.ini && \
+RUN echo "opcache.enable=1" >> /etc/php/7.1/fpm/php.ini && \
+    echo "opcache.enable=1" >> /etc/php/7.1/cli/php.ini && \
     phpenmod opcache && \
     php -i | grep opcache
 
