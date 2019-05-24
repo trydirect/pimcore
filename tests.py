@@ -33,6 +33,6 @@ mysql_log = mysql.logs()
 assert "mysqld: ready for connections" in mysql_log.decode()
 print(mysql_log.decode())
 
-response = requests.get("http://localhost")
-print(response)
+# response = requests.get("http://localhost")
+# print(response)
 # assert response.status_code == 200
