@@ -19,7 +19,7 @@ assert php.status == 'running'
 php_conf = php.exec_run("php-fpm7.1 -t")
 print(php_conf.output.decode())
 assert 'configuration file /etc/php/7.1/fpm/php-fpm.conf test is successful' in php_conf.output.decode()
-php_proc = php.exec_run("sh -c 'ps aux|grep php-fpm7'")
+php_proc = php.exec_run("sh -c 'ps aux|grep php-fpm'")
 print(php_proc.output.decode())
 # assert 'php-fpm: master process (/usr/local/etc/php-fpm.conf)' in php_proc.output.decode()
 assert 'fpm is running, pid' in php_proc.output.decode()
