@@ -59,7 +59,7 @@ USER pimcore
 RUN composer global require hirak/prestissimo
 WORKDIR /var/www/html
 # Too long to wait
-RUN COMPOSER_MEMORY_LIMIT=3G composer create-project pimcore/demo-basic /usr/src/pimcore --no-dev
+RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo-basic /usr/src/pimcore --no-dev
 
 USER root
 RUN touch /var/run/nginx.pid && \
