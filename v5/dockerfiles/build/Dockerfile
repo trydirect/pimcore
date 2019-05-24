@@ -62,7 +62,7 @@ RUN echo "opcache.enable=1" >> /etc/php/7.1/fpm/php.ini && \
 
 # Too long to wait
 RUN composer global require hirak/prestissimo
-RUN COMPOSER_MEMORY_LIMIT=3G SYMFONY_ENV=prod composer create-project pimcore/demo-basic /usr/src/pimcore --no-dev
+RUN COMPOSER_MEMORY_LIMIT=3G SYMFONY_ENV=prod composer create-project pimcore/demo-basic /usr/src/pimcore
 RUN groupadd -r -g 2000 pimcore; useradd -r -u 2000 -g 2000 -m -c "app account" -d /home/pimcore -s /bin/bash pimcore
 
 RUN touch /var/run/nginx.pid && \
