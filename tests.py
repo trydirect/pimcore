@@ -13,7 +13,7 @@ for c in client.containers.list():
     print(c.name)
     print(c.status)
 
-# Symfony PHP
+# PHP
 php = client.containers.get('pimcore')
 assert php.status == 'running'
 php_conf = php.exec_run("php-fpm7.1 -t")
@@ -28,13 +28,6 @@ assert 'fpm is running, pid' in php_proc.output.decode()
 
 mysql = client.containers.get('pimcoredb')
 assert mysql.status == 'running'
-<<<<<<< Updated upstream
-mycnf = mysql.exec_run("/usr/sbin/mysqld --verbose  --help")
-assert '/usr/sbin/mysqld  Ver 5.7.26' in mycnf.output.decode()
-mysql_log = mysql.logs()
-assert "mysqld: ready for connections" in mysql_log.decode()
-print(mysql_log.decode())
-=======
 mycnf = mysql.exec_run("/usr/sbin/mysqld --verbose --help")
 # print(mycnf.output.decode())
 assert 'mysqld  Ver 5.7' in mycnf.output.decode()
@@ -44,4 +37,3 @@ assert "mysqld: ready for connections" in mysql_log.decode()
 
 # response = requests.get("http://localhost")
 # assert response.status_code == 200
->>>>>>> Stashed changes
