@@ -18,3 +18,8 @@ Deploy Pimcore with docker-compose (development only)
 Pimcore, the leading open-source enterprise software platform for PIM, DAM & eCommerce
 
 Docker hub image: https://cloud.docker.com/repository/docker/trydirect/pimcore
+
+
+## Quick deployment to cloud
+##### Amazon AWS, Digital Ocean, Hetzner and others
+[<img src="https://img.shields.io/badge/quick%20deploy-%40try.direct-brightgreen.svg">](https://try.direct/server/user/deploy/InBpbWNvcmV8NnwxMiI.EAoFeA.NqZkUfUOLs9kNJG3WHwkjPePTkE/)
