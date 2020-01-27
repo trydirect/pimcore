@@ -1,0 +1,20 @@
+parameters:
+    secret: {{SecretToken}}
+
+    pimcore_executable_cjpeg: /usr/local/bin/cjpeg
+    pimcore_executable_sqip: /usr/local/bin/primitive
+    pimcore_executable_composer: php /usr/bin/composer.phar
+    pimcore_executable_html2text: /usr/local/bin/html2text
+    pimcore_executable_soffice: /usr/bin/soffice
+    pimcore_executable_gs: /usr/bin/gs
+    pimcore_executable_pdftotext: /usr/bin/pdftotext
+    #pimcore_executable_xvfb-run: /opt/tools/xvfb-run
+    pimcore_executable_pngcrush: /usr/local/bin/pngcrush
+    pimcore_executable_zopflipng: /usr/local/bin/zopflipng
+    pimcore_executable_pngout: /usr/local/bin/pngout
+    pimcore_executable_advpng: /usr/local/bin/advpng
+    pimcore_executable_jpegoptim: /usr/local/bin/jpegoptim
+    pimcore_executable_nice: /usr/bin/nice
+    pimcore_executable_nohup: /usr/bin/nohup
+    pimcore_executable_ffmpeg: /usr/local/bin/ffmpeg
+    pimcore_executable_exiftool: /usr/bin/exiftool

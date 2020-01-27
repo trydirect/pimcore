@@ -15,10 +15,14 @@ before_install:
 - pip install docker-compose
 - docker-compose --version
 install:
-- cd v5/dockerfiles
+- cd v6/dockerfiles
 - docker-compose build
 - docker-compose up -d
 - docker-compose ps
+- docker-compose exec --user=pimcore pimcore bash -c "chmod 0777 -R /var/www/html/web/var"
+- docker-compose exec db bash -c /scripts/mysql.sh
+- docker-compose exec --user=pimcore pimcore ./vendor/bin/pimcore-install --mysql-host-socket db --admin-username "admin" --admin-password "admin" --mysql-username "pimcore" --mysql-password "pimcore" --mysql-database "pimcore" --no-interaction
+
 before_script:
 - cd $TRAVIS_BUILD_DIR
 - pip install requests
@@ -31,7 +35,7 @@ notifications:
     rooms:
     - optimum-team:GycletOWK4Kt95GktwYwfUMp#build
 after_success:
-- cd v5/dockerfiles
+- cd v6/dockerfiles
 - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 - docker-compose -f docker-compose-build.yml images
-- docker push trydirect/pimcore:5
+- docker push trydirect/pimcore:6
