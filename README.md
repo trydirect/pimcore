@@ -11,7 +11,7 @@ Deploy Pimcore with docker-compose (development only)
 
 ## Stack includes:
 - Pimcore v6
-- PHP 7.2 fpm
+- PHP 7.3 fpm
 - Ubuntu 18.04
 
 
