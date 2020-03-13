@@ -26,7 +26,6 @@ services:
     depends_on:
           db:
               condition: service_healthy
-    entrypoint: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n
 
   db:
     image: mysql:5.7
