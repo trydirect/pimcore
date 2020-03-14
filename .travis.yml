@@ -20,7 +20,7 @@ install:
 - docker-compose up -d
 - docker-compose ps
 - docker-compose exec db bash -c /scripts/mysql.sh
-- docker-compose exec pimcore sh -c './vendor/bin/pimcore-install --no-interaction --admin-username=pimcore --admin-password=pimcore --mysql-host-socket=db --mysql-username=root --mysql-password=root --mysql-database=pimcore'
+- docker-compose exec pimcore sh -c './vendor/bin/pimcore-install --no-interaction --admin-username=pimcore --admin-password=pimcore --mysql-host-socket=db --mysql-username=pimcore --mysql-password=pimcore --mysql-database=pimcore'
 - docker-compose exec pimcore bash -c 'chmod 0777 -R app/config bin composer.json pimcore var web/var'
 
 before_script:
