@@ -29,6 +29,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: pimcoredb
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
