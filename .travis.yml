@@ -16,7 +16,7 @@ before_install:
 - docker-compose --version
 install:
 - cd v6/dockerfiles
-- docker-compose build
+- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build
 - docker-compose up -d
 - docker-compose ps
 - docker-compose exec db bash -c /scripts/mysql.sh
