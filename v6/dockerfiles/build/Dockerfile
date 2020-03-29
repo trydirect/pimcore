@@ -162,4 +162,7 @@ RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton=${PIMCORE_
     \) -delete \
     && rm -f /usr/bin/curl
 
+COPY ./configs/php/fpm/php.ini $PHP_INI_DIR/conf.d/
+COPY ./configs/php/www.conf /usr/local/etc/php-fpm.d/www.conf
+
 USER pimcore
