@@ -89,7 +89,7 @@ RUN pecl install \
       && test "$o" = "xdebug" \
     )
 
-RUN COMPOSER_MEMORY_LIMIT=-1 composer --prefer-dist create-project pimcore/demo=${PIMCORE_DEMO_VERSION} pimcore \
+RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo=${PIMCORE_DEMO_VERSION} pimcore \
     && mv /var/www/html/pimcore/* /var/www/html/ \
     && rm -rf /root/.composer/*
 
