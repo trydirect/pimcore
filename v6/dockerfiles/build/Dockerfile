@@ -144,7 +144,7 @@ RUN groupadd --gid 2000 pimcore \
     && find /bin /etc /lib /sbin /usr -xdev -type l -exec test ! -e {} \; -delete \
     && rm -rf /root /etc/fstab
 
-RUN COMPOSER_MEMORY_LIMIT=-1 --prefer-dist composer create-project pimcore/skeleton=${PIMCORE_SKELETON_VERSION} pimcore \
+RUN COMPOSER_MEMORY_LIMIT=-1 composer --prefer-dist create-project pimcore/skeleton=${PIMCORE_SKELETON_VERSION} pimcore \
     && mv /var/www/html/pimcore/* /var/www/html/ \
     && chown -R pimcore:pimcore /var/www/ \
     && chmod 700 /var/www/ \
