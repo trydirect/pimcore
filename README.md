@@ -7,29 +7,31 @@
 [![Coverage Status](https://coveralls.io/repos/github/trydirect/pimcore/badge.svg?branch=master)](https://coveralls.io/github/trydirect/pimcore?branch=master)
 
 # Pimcore stack
-Deploy Pimcore with docker-compose (development only)
+Deploy Pimcore with docker-compose multistage
 
 ## Stack includes:
-- Pimcore v6
+- Official PHP docker image: 7.3-fpm
 - PHP 7.3 fpm
-- Ubuntu 18.04
-
+- Pimcore v6
 
 
 # About Pimcore platform
 Pimcore, the leading open-source enterprise software platform for PIM, DAM & eCommerce
 
-Docker hub image: https://cloud.docker.com/repository/docker/trydirect/pimcore
+Docker hub dev image: https://cloud.docker.com/repository/docker/trydirect/pimcore:6-dev
+Docker hub prod image: https://cloud.docker.com/repository/docker/trydirect/pimcore:6-prod
 
 ## RUN installer
 ```
-docker-compose exec --user=pimcore pimcore bash -c "chmod 0777 -R /var/www/html/web/var"
-docker-compose exec db bash -c /scripts/mysql.sh
-docker-compose exec --user=pimcore pimcore ./vendor/bin/pimcore-install --mysql-host-socket db --admin-username "admin" --admin-password "admin" --mysql-username "pimcore" --mysql-password "pimcore" --mysql-database "pimcore" --no-interaction 
+docker-compose exec pimcore bash -c 'chmod 0777 -R app/config bin composer.json pimcore var web/var'
+docker-compose exec pimcore sh -c './vendor/bin/pimcore-install --no-interaction --admin-username=pimcore --admin-password=pimcore --mysql-host-socket=db --mysql-username=root --mysql-password=pimcore --mysql-database=pimcore'
 ```
+
 
 ## Quick deployment to cloud
 ##### Amazon AWS, Digital Ocean, Hetzner and others
 
 Pimcore version 5 [<img src="https://img.shields.io/badge/quick%20deploy-%40try.direct-brightgreen.svg">](https://try.direct/server/user/deploy/InBpbWNvcmV8NnwxMiI.EAoFeA.NqZkUfUOLs9kNJG3WHwkjPePTkE/)
+
+
 

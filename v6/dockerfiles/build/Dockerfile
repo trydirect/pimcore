@@ -27,7 +27,8 @@ ENV PHP_DEPENDENCIES \
         libicu-dev \
         libzip-dev \
         unzip \
-        zip
+        zip \
+        git
 
 SHELL ["/bin/bash", "-c"]
 
