@@ -16,7 +16,8 @@ before_install:
 - docker-compose --version
 install:
 - cd v6/dockerfiles
-- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build
+- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker build . -t trydirect/pimcore:6-dev -target dev
+- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker build . -t trydirect/pimcore:6-prod -target prod
 - docker-compose up -d
 - docker-compose ps
 - docker-compose exec db bash -c /scripts/mysql.sh
@@ -38,5 +39,6 @@ notifications:
 after_success:
 - cd v6/dockerfiles
 - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-- docker-compose -f docker-compose-build.yml images
-- docker push trydirect/pimcore:6
+- docker-compose images
+- docker push trydirect/pimcore:6-dev
+- docker push trydirect/pimcore:6-prod
