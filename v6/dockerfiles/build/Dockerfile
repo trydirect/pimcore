@@ -27,7 +27,8 @@ ENV PHP_DEPENDENCIES \
         libicu-dev \
         libzip-dev \
         unzip \
-        zip
+        zip \
+        git
 
 SHELL ["/bin/bash", "-c"]
 
@@ -65,7 +66,7 @@ RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends --no-in
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN composer global require hirak/prestissimo
+RUN composer global --prefer-dist require hirak/prestissimo
 
 WORKDIR /var/www/html
 
@@ -143,7 +144,7 @@ RUN groupadd --gid 2000 pimcore \
     && find /bin /etc /lib /sbin /usr -xdev -type l -exec test ! -e {} \; -delete \
     && rm -rf /root /etc/fstab
 
-RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton=${PIMCORE_SKELETON_VERSION} pimcore \
+RUN COMPOSER_MEMORY_LIMIT=-1 composer --prefer-dist create-project pimcore/skeleton=${PIMCORE_SKELETON_VERSION} pimcore \
     && mv /var/www/html/pimcore/* /var/www/html/ \
     && chown -R pimcore:pimcore /var/www/ \
     && chmod 700 /var/www/ \

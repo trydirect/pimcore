@@ -11,7 +11,7 @@ services:
     build:
       context: ./build
       target: dev
-    image: trydirect/pimcore:6
+    image: trydirect/pimcore:6-dev
     container_name: pimcore
     hostname: pimcore
     restart: always
@@ -39,8 +39,9 @@ services:
       timeout: 30s
       retries: 10
     volumes:
-      - pimcore-db:/var/lib/mysql
+      - ./database/initial-dump.sql:/docker-entrypoint-initdb.d/initial_dump.sql
       - ./build/scripts:/scripts
+      - pimcore-db:/var/lib/mysql
     env_file:
       - .env
 

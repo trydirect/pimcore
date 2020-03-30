@@ -16,21 +16,22 @@ before_install:
 - docker-compose --version
 install:
 - cd v6/dockerfiles
-- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker build . -t trydirect/pimcore:6-dev -target dev
-- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker build . -t trydirect/pimcore:6-prod -target prod
-- docker-compose up -d
-- docker-compose ps
-- docker-compose exec db bash -c /scripts/mysql.sh
-- docker-compose exec pimcore bash -c 'chmod 0777 -R app/config bin composer.json pimcore var web/var'
-- docker-compose exec pimcore sh -c './vendor/bin/pimcore-install --no-interaction --admin-username=pimcore --admin-password=pimcore --mysql-host-socket=db --mysql-username=root --mysql-password=pimcore --mysql-database=pimcore'
-- docker-compose exec pimcore bash -c 'chmod 0777 -R app/config bin composer.json pimcore var web/var'
+- COMPOSE_DOCKER_CLI_BUILD=1 docker build ./build -t trydirect/pimcore:6-dev --target=dev
+- COMPOSE_DOCKER_CLI_BUILD=1 docker build ./build -t trydirect/pimcore:6-prod --target=prod
+  #- COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose --build
+  #- docker-compose up -d
+  #- docker-compose ps
+  #- docker-compose exec db bash -c /scripts/mysql.sh
+  #- docker-compose exec pimcore bash -c 'chmod 0777 -R app/config bin composer.json pimcore var web/var'
+  #- docker-compose exec pimcore sh -c './vendor/bin/pimcore-install --no-interaction --admin-username=pimcore --admin-password=pimcore --mysql-host-socket=db --mysql-username=pimcore --mysql-password=pimcore --mysql-database=pimcore'
+  #- docker-compose exec pimcore bash -c 'chmod 0777 -R app/config bin composer.json pimcore var web/var'
 
 before_script:
 - cd $TRAVIS_BUILD_DIR
 - pip install requests
 - pip install docker
 script:
-- python tests.py
+  #- python tests.py
 - bash ./.travis/linters.sh
 notifications:
   slack:
