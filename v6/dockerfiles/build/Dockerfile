@@ -66,7 +66,7 @@ RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends --no-in
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN composer global require hirak/prestissimo
+RUN composer global --prefer-dist require hirak/prestissimo
 
 WORKDIR /var/www/html
 
@@ -89,7 +89,7 @@ RUN pecl install \
       && test "$o" = "xdebug" \
     )
 
-RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo=${PIMCORE_DEMO_VERSION} pimcore \
+RUN COMPOSER_MEMORY_LIMIT=-1 composer --prefer-dist create-project pimcore/demo=${PIMCORE_DEMO_VERSION} pimcore \
     && mv /var/www/html/pimcore/* /var/www/html/ \
     && rm -rf /root/.composer/*
 
